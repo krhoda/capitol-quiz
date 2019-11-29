@@ -2,8 +2,6 @@ module Lib
     ( startNewGame
     ) where
 
--- import qualified Data.Set as Set
-
 intro :: IO ()
 intro = putStrLn "Welcome to TBD GAME NAME, let's play a game!"
 
@@ -30,5 +28,3 @@ askAll x = do
 type Capitol = String
 type Region = String
 type Entry = (Region, Capitol)
-
-  -- [("Colorado", "Denver"),("Wyoming", "Cheyanne"),("Arizona", "Phoenix")]
