@@ -2,16 +2,21 @@ module Lib
     ( startNewGame
     ) where
 
+import QuizData
+
 intro :: IO ()
 intro = putStrLn "Welcome to TBD GAME NAME, let's play a game!"
+
+askForGame :: IO ()
+askForGame = putStr ""
 
 startNewGame :: IO ()
 startNewGame = do
   intro
-  askAll (createQuestions [("Colorado", "Denver"),("Wyoming", "Cheyanne"),("Arizona", "Phoenix")])
+  askAll (createQuestions usStateList)
 
 createQuestions :: [Entry] -> [IO ()]
-createQuestions x = map askAStupidQuestion x
+createQuestions = map askAStupidQuestion
 
 askAStupidQuestion :: Entry -> IO ()
 askAStupidQuestion (reg, cap) = do
@@ -22,9 +27,5 @@ askAStupidQuestion (reg, cap) = do
 askAll :: [IO ()] -> IO ()
 askAll [] = putStrLn "done"
 askAll x = do
-  (head x)
+  head x
   askAll (tail x)
-
-type Capitol = String
-type Region = String
-type Entry = (Region, Capitol)
