@@ -6,13 +6,14 @@ module QuizGame
 import QuizData
 import System.Random
 
--- shuffle :: [a] -> IO a]
-shuffle x = if length x < 2
-  then return x
+shuffle :: [a] -> IO [a]
+shuffle target = if length target < 2
+  then return target
   else do
-    i <- System.Random.randomRIO (0, length (x)-1)
-    r <- shuffle (take i x ++ drop (i+1) x)
-    return (x!!i : r)
+    let maxBound = ((-) (length target) 1)
+    sliceIndex <- randomRIO (0, maxBound)
+    rest <- shuffle (take sliceIndex target ++ drop (sliceIndex+1) target)
+    return (target!!sliceIndex : rest)
 
 createGameDesc :: Game -> String
 createGameDesc (label, gameName, _) = "#" ++ label ++ ") Do you want to play " ++ gameName ++ "?\n"
